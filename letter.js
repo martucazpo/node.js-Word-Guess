@@ -1,19 +1,17 @@
 var cleanWord = ['m', 'a', 'r', 'c', 'o'];
 var guess = process.argv[2];
 
-var LetterObject = function (placeholder,letter) {
+var gameWord = [];
 
-  var letterArray = ["A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I", "i", "J", "j", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t", "U", "u", "V", "v", "W", "w", "X", "x", "Y", "y", "Z", "z"];
-  var letter;
-
-
+var LetterObject = function (letter, placeholder) {
+  
+  this.letter = letter;
   this.placeholder = "_";
-  this.letter = cleanWord[0];
   this.show = function () {
     console.log(this.letter);
   };
   this.hide = function () {
-    console.log(this.placeholder);
+    console.log(this.letter);
   };
   this.letterGuess = function () {
     if (this.letter === guess) {
@@ -33,26 +31,15 @@ var LetterObject = function (placeholder,letter) {
   };
 };
 
+LetterObject();
 
-/*var m = new LetterObject("m", "_");
-var a = new LetterObject("a", "_");
-var r = new LetterObject("r", "_");
-var c = new LetterObject("c", "_");
-var o = new LetterObject("o", "_");
+makeWord = function(){
 
-letterArray.push(m, a, r, c, o);
-
-  for (i = 0; i < letterArray.length; i++) {
-    letterArray[i].toString();
-    if(letterArray[i].letterGuess() == true){
-      correctLetter.push(letterArray[i].letter)
-    }
-  
-  }*/
-// for( var j = 0; j < cleanWord.length; j++){
-  LetterObject();
-
-  for ( k = 0; k < cleanWord.length; k++){
-
-cleanWord[k] = new LetterObject();
-console.log(cleanWord[k]);}
+  for( i = 0; i < cleanWord.length; i++){
+    letter = cleanWord[i];
+letter = new LetterObject(letter,placeholder);
+gameWord.push(new LetterObject(letter,placeholder));
+  }
+  console.log(gameWord);
+};
+makeWord();

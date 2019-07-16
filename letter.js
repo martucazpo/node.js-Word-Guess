@@ -3,15 +3,15 @@ var guess = process.argv[2];
 
 var gameWord = [];
 
-var LetterObject = function (letter, placeholder) {
-  
+var LetterObject = function (letter) {
+
   this.letter = letter;
   this.placeholder = "_";
   this.show = function () {
     console.log(this.letter);
   };
   this.hide = function () {
-    console.log(this.letter);
+    console.log(this.placeholder);
   };
   this.letterGuess = function () {
     if (this.letter === guess) {
@@ -33,13 +33,15 @@ var LetterObject = function (letter, placeholder) {
 
 LetterObject();
 
-makeWord = function(){
+makeWord = function () {
 
-  for( i = 0; i < cleanWord.length; i++){
+  for (i = 0; i < cleanWord.length; i++) {
     letter = cleanWord[i];
-letter = new LetterObject(letter,placeholder);
-gameWord.push(new LetterObject(letter,placeholder));
+    cleanWord[i] = new LetterObject(letter);
+    gameWord.push(new LetterObject(letter));
   }
-  console.log(gameWord);
+  for (j = 0; j < gameWord.length; j++) {
+    console.log(gameWord[j].toString());
+  }
 };
 makeWord();

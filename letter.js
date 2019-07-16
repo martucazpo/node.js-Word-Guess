@@ -1,9 +1,18 @@
-var cleanWord = ['m', 'a', 'r', 'c', 'o'];
-var guess = process.argv[2];
+var guess = "";
+var nodeArgs = process.argv;
+for (var i = 2; i < nodeArgs.length; i++) {
 
-var gameWord = [];
+  if (i > 2 && i < nodeArgs.length) {
+    guess = guess + "+" + nodeArgs[i];
+  } else {
+    guess += nodeArgs[i];
 
-var LetterObject = function (letter) {
+  }
+}
+
+var letter;
+
+var LetterObject = function () {
 
   this.letter = letter;
   this.placeholder = "_";
@@ -21,27 +30,15 @@ var LetterObject = function (letter) {
       return false;
     }
   };
-  this.toString = function () {
+  this.display = function () {
     if (this.letterGuess() == true) {
-      this.show(letter);
+      this.show(this.letter);
     }
     if (this.letterGuess() == false) {
-      this.hide(placeholder);
+      this.hide(this.placeholder);
     }
   };
 };
 
-LetterObject();
 
-makeWord = function () {
-
-  for (i = 0; i < cleanWord.length; i++) {
-    letter = cleanWord[i];
-    cleanWord[i] = new LetterObject(letter);
-    gameWord.push(new LetterObject(letter));
-  }
-  for (j = 0; j < gameWord.length; j++) {
-    console.log(gameWord[j].toString());
-  }
-};
-makeWord();
+module.exports = LetterObject;

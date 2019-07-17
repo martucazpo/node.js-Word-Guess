@@ -1,30 +1,15 @@
-var guess = "";
-var nodeArgs = process.argv;
-for (var i = 2; i < nodeArgs.length; i++) {
+var guess = process.argv[2];
 
-  if (i > 2 && i < nodeArgs.length) {
-    guess = guess + "+" + nodeArgs[i];
-  } else {
-    guess += nodeArgs[i];
-
-  }
-}
-
-var letter;
-
-var LetterObject = function () {
+var LetterObject = function (letter) {
 
   this.letter = letter;
   this.placeholder = "_";
-  this.show = function () {
-    console.log(this.letter);
-  };
-  this.hide = function () {
-    console.log(this.placeholder);
-  };
+  this.trigger = false;
   this.letterGuess = function () {
     if (this.letter === guess) {
+      this.trigger = true;
       return true;
+      
     }
     if (this.letter !== guess) {
       return false;

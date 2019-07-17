@@ -18,8 +18,9 @@ var Word = function () {
     for (i = 0; i < cleanWord.length; i++) {
       letter = cleanWord[i];
       letterObject.letter = letter;
-      gameWord.push(letterObject.display());
+      gameWord.push(letterObject.toString());
     }
+    console.log(gameWord);
   };
   makeWord();
 };

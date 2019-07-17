@@ -30,12 +30,12 @@ var LetterObject = function () {
       return false;
     }
   };
-  this.display = function () {
+  this.toString = function () {
     if (this.letterGuess() == true) {
-      this.show(this.letter);
+      return this.letter;
     }
     if (this.letterGuess() == false) {
-      this.hide(this.placeholder);
+      return this.placeholder;
     }
   };
 };

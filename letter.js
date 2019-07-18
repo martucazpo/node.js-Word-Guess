@@ -1,17 +1,20 @@
-var guess = process.argv[2];
+
 
 var LetterObject = function (letter) {
 
   this.letter = letter;
   this.placeholder = "_";
   this.trigger = false;
-  this.letterGuess = function () {
-    if (this.letter === guess) {
+  this.show = function(){
+    return this.letter;
+  };
+  this.letterGuess = function (userGuess) {
+    if (this.letter === userGuess) {
       this.trigger = true;
-      return true;
+      return this.letter;
       
     }
-    if (this.letter !== guess) {
+    if (this.letter !== userGuess) {
       return false;
     }
   };

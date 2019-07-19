@@ -1,44 +1,44 @@
-var MakeWord = require("./word");
+var Word = require("./word");
 var inquirer = require("inquirer");
-var chalk = require("chalk");
-var guess = inquirer.input;
-var makeWord;
-var theWord = "";
+var myWord = "";
 var counter = 0;
 
 function startGame() {
-     makeWord = new MakeWord();
-     theWord = makeWord.word; 
+   
+     myWord = new Word();
+     choiceWord = myWord.cleanWord;
+     myWord.makeWord(); 
     console.log("You have 10 chances to guess the word!");
     promptUser();
 }
 
 function promptUser() {
     if (counter < 10) {
-        console.log(theWord);
+        console.log(myWord.wordDisplay());
         inquirer.prompt([
             {
                 type: "input",
                 name: "letter",
                 message: "Pick a letter and press enter. "
             }
-        ]).then(function(data) {
-                checkAnswer(data);
+        ]).then(function() {
+                gameAnswer();
         });
     }
     else{
         console.log("Sorry, you're out of guesses.");
-        console.log(theWord);
-        theWord = " ";
+        console.log(choiceWord);
+        myWord = " ";
         select = 0;
         counter = 0;
         startGame();
     }
 }
 
-function checkAnswer(data) {
+function gameAnswer(input) {
+    myWord.checkAnswer();
     
-      if (makeWord.checkAnswer == false ){
+      if (myWord.checkAnswer() !== true ){
             console.log("Sorry, wrong letter!");
             counter++;
             console.log(counter + " guesses remaining");
@@ -54,12 +54,12 @@ function checkAnswer(data) {
   //  }
 }
 
-function rightGuess() {
+function rightGuess(input) {
     console.log("You guessed right!");
-    if (makeWord.checkAnswer == true ) {
-        console.log(theWord);
+    if (choiceWord === myWord.wordDisplay ) {
+        myWord.wordDisplay();
         console.log("You win!!");
-        theWord = "";
+        myWord = "";
         select = 0;
         counter = 0;
         startGame();

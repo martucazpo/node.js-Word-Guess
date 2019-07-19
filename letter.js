@@ -3,28 +3,23 @@
 var LetterObject = function (letter) {
 
   this.letter = letter;
-  this.placeholder = "_";
-  this.trigger = false;
-  this.show = function(){
-    return this.letter;
-  };
-  this.letterGuess = function (userGuess) {
-    if (this.letter === userGuess) {
-      this.trigger = true;
-      return this.letter;
-      
-    }
-    if (this.letter !== userGuess) {
-      return false;
-    }
-  };
+  this.letterGuess = false;
   this.toString = function () {
-    if (this.letterGuess() == true) {
+    if (this.checkLetter() == " ") {
+      return " ";
+    }
+    else if (this.checkLetter() == false) {
+      return "_";
+    }
+    else {
       return this.letter;
     }
-    if (this.letterGuess() == false) {
-      return this.placeholder;
+  };
+  this.checkLetter = function(userGuess){
+    if(userGuess === this.letter){
+      this.letterGuess = true;
     }
+
   };
 };
 

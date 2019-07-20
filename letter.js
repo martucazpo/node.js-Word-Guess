@@ -9,17 +9,16 @@ var LetterObject = function (letter) {
     if (this.letter == " ") {
       return " ";
     }
-    else if (!this.letterGuess) {
+    else if (this.letterGuess == false) {
       return this.placeholder;
     }
     else {
       return this.letter;
     }
   };
-  this.checkLetter = function(guess){
-    if(guess === this.letter){
+  this.checkLetter = function(input){
+    if(input === this.letter){
       this.letterGuess = true;
-      console.log(this.letterGuess);
     }
 
   };

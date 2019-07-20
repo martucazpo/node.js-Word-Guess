@@ -15,6 +15,7 @@ function startGame() {
 
 function promptUser() {
     if (counter < 10) {
+        console.log(choiceWord);
     console.log(myWord.wordDisplay());
         inquirer.prompt([
             {
@@ -22,11 +23,14 @@ function promptUser() {
                 name: "letter",
                 message: "Pick a letter and press enter. "
             }
-        ]).then(function(data) {
-                gameAnswer(data);
+        ]).then(function(input) {
+               // gameAnswer(input);
+               myWord.checkAnswer(input);
+               console.log(choiceWord);
+              console.log(myWord.wordDisplay());
         });
     }
-    else{
+   /* else{
         console.log("Sorry, you're out of guesses.");
         console.log(choiceWord);
         myWord = "";
@@ -34,10 +38,10 @@ function promptUser() {
         select = 0;
         counter = 0;
         startGame();
-    }
+    }*/
 }
 
-function gameAnswer(data) {
+/*function gameAnswer(data) {
     
     myWord.checkAnswer(data.letter);
 
@@ -66,6 +70,6 @@ function rightGuess() {
     else {
         promptUser();
     }
-}
+}*/
 
 startGame();   

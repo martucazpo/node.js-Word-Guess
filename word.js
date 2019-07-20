@@ -38,10 +38,9 @@ Word = function () {
   };
 
 
-  this.checkAnswer = function (guess) {
+  this.checkAnswer = function (input) {
     for (k = 0; k < this.gameWord.length; k++) {
-      this.gameWord[k].checkLetter(guess);
-      return gameWord[k].letterGuess;
+      this.gameWord[k].checkLetter(input);
     }
   };
   

@@ -3,25 +3,26 @@
 var LetterObject = function (letter) {
 
   this.letter = letter;
+  this.placeholder = "_";
   this.letterGuess = false;
-  this.toString = function () {
-    if (this.checkLetter() == " ") {
+  this.showLetters = function () {
+    if (this.letter == " ") {
       return " ";
     }
-    else if (this.checkLetter() == false) {
-      return "_";
+    else if (!this.letterGuess) {
+      return this.placeholder;
     }
     else {
       return this.letter;
     }
   };
-  this.checkLetter = function(userGuess){
-    if(userGuess === this.letter){
+  this.checkLetter = function(input){
+    if(input === this.letter){
       this.letterGuess = true;
     }
 
   };
 };
-
+LetterObject();
 
 module.exports = LetterObject;

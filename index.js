@@ -1,20 +1,22 @@
 var Word = require("./word");
 var inquirer = require("inquirer");
+var input = inquirer.answer;
 var myWord = "";
+var choiceWord = "";
 var counter = 0;
 
 function startGame() {
    
      myWord = new Word();
-     choiceWord = myWord.cleanWord;
-     myWord.makeWord(); 
+     myWord.makeWord();
+     choiceWord = myWord.cleanWord; 
     console.log("You have 10 chances to guess the word!");
     promptUser();
 }
 
 function promptUser() {
     if (counter < 10) {
-        console.log(myWord.wordDisplay());
+    console.log(myWord.wordDisplay(input));
         inquirer.prompt([
             {
                 type: "input",
@@ -28,14 +30,15 @@ function promptUser() {
     else{
         console.log("Sorry, you're out of guesses.");
         console.log(choiceWord);
-        myWord = " ";
+        myWord = "";
+        choiceWord = "";
         select = 0;
         counter = 0;
         startGame();
     }
 }
 
-function gameAnswer(input) {
+function gameAnswer() {
     myWord.checkAnswer();
     
       if (myWord.checkAnswer() !== true ){
@@ -54,9 +57,9 @@ function gameAnswer(input) {
   //  }
 }
 
-function rightGuess(input) {
+function rightGuess() {
     console.log("You guessed right!");
-    if (choiceWord === myWord.wordDisplay ) {
+    if (choiceWord === myWord.wordDisplay() ) {
         myWord.wordDisplay();
         console.log("You win!!");
         myWord = "";

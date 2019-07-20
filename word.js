@@ -2,49 +2,47 @@ var LetterObject = require("./letter.js");
 
 var letterObject = new LetterObject();
 
-
-
-
-Word = function (wordArray) {
-
+Word = function () {
   var letter;
+  var gameWord = [];
   var displayWord = [];
-  var wordArray = [];
 
-  this.wordArray = ["mongoose", "shrew", "possum", "aardvark"];
+  var wordArray = ["mongoose", "shrew", "possum", "aardvark"];
 
-  this.randNum = Math.floor(Math.random() * this.wordArray.length);
+  var randNum = Math.floor(Math.random() * wordArray.length);
 
-  this.randWord = this.wordArray[this.randNum];
+  var randWord = wordArray[randNum];
 
-  this.chars = JSON.stringify(this.randWord).split('');
+  var chars = JSON.stringify(randWord).split('');
 
-  this.cleanWord = this.chars.slice(1, this.chars.length - 1);
-
-  this.gameWord = [];
+  var cleanWord = chars.slice(1, chars.length - 1);
 
   this.makeWord = function () {
-    for (i = 0; i < this.cleanWord.length; i++) {
-      letter = this.cleanWord[i];
+    for (i = 0; i < cleanWord.length; i++) {
+      letter = cleanWord[i];
       letterObject.letter = letter;
-      this.gameWord.push(letterObject);
+      gameWord.push(letterObject);
     }
   };
+makeWord();
+  this.cleanWord = cleanWord;
 
-  this.wordDisplay = function () {
+  this.gameWord = gameWord;
+
+ this.wordDisplay = function () {
     for (j = 0; j < this.gameWord.length; j++) {
-      displayWord.push(this.gameWord[j].toString());
+      displayWord.push(this.gameWord[j].showLetters());
     }
     return displayWord.join(" ");
   };
+wordDisplay();
 
-
-  this.checkAnswer = function () {
+  this.checkAnswer = function (input) {
     for (k = 0; j < this.gameWord.length; k++) {
-      this.gameWord[k].checkLetter();
+      this.gameWord[k].checkLetter(input);
     }
   };
 };
-
+Word();
 
 module.exports = Word;

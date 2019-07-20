@@ -4,7 +4,7 @@ var letterObject = new LetterObject();
 
 Word = function () {
   var letter;
-  var gameWord = [];
+
   var displayWord = [];
 
   var wordArray = ["mongoose", "shrew", "possum", "aardvark"];
@@ -17,32 +17,34 @@ Word = function () {
 
   var cleanWord = chars.slice(1, chars.length - 1);
 
+  var gameWord = [];
+
   this.makeWord = function () {
     for (i = 0; i < cleanWord.length; i++) {
       letter = cleanWord[i];
       letterObject.letter = letter;
-      gameWord.push(letterObject);
+     gameWord.push(letterObject);
     }
   };
-makeWord();
-  this.cleanWord = cleanWord;
 
+  this.cleanWord = cleanWord;
   this.gameWord = gameWord;
 
- this.wordDisplay = function () {
+  this.wordDisplay = function () {
     for (j = 0; j < this.gameWord.length; j++) {
       displayWord.push(this.gameWord[j].showLetters());
     }
     return displayWord.join(" ");
   };
-wordDisplay();
 
-  this.checkAnswer = function (input) {
-    for (k = 0; j < this.gameWord.length; k++) {
-      this.gameWord[k].checkLetter(input);
+
+  this.checkAnswer = function (guess) {
+    for (k = 0; k < this.gameWord.length; k++) {
+      this.gameWord[k].checkLetter(guess);
+      return gameWord[k].letterGuess;
     }
   };
+  
 };
-Word();
 
 module.exports = Word;

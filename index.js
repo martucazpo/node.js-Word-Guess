@@ -1,6 +1,5 @@
 var Word = require("./word");
 var inquirer = require("inquirer");
-var input = inquirer.answer;
 var myWord = "";
 var choiceWord = "";
 var counter = 0;
@@ -16,15 +15,15 @@ function startGame() {
 
 function promptUser() {
     if (counter < 10) {
-    console.log(myWord.wordDisplay(input));
+    console.log(myWord.wordDisplay());
         inquirer.prompt([
             {
                 type: "input",
                 name: "letter",
                 message: "Pick a letter and press enter. "
             }
-        ]).then(function() {
-                gameAnswer();
+        ]).then(function(data) {
+                gameAnswer(data);
         });
     }
     else{
@@ -38,29 +37,26 @@ function promptUser() {
     }
 }
 
-function gameAnswer() {
-    myWord.checkAnswer();
+function gameAnswer(data) {
     
-      if (myWord.checkAnswer() !== true ){
+    myWord.checkAnswer(data.letter);
+
+      if (myWord.checkAnswer(data.letter) == false){
             console.log("Sorry, wrong letter!");
             counter++;
-            console.log(counter + " guesses remaining");
+            console.log((10 - counter) + " guesses remaining");
             promptUser();
         }
         else {
             rightGuess();
         }
     
-  //  else {
-      //  console.log("Please enter a letter, one at a time.");
-      //  promptUser();
-  //  }
 }
 
 function rightGuess() {
     console.log("You guessed right!");
     if (choiceWord === myWord.wordDisplay() ) {
-        myWord.wordDisplay();
+        console.log(myWord.wordDisplay());
         console.log("You win!!");
         myWord = "";
         select = 0;
